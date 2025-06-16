@@ -91,6 +91,29 @@ POST /api/generate-gantt
 }
 ```
 
+## Frontend Setup
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies (requires Node.js 16+ and npm):
+```bash
+npm install
+```
+
+3. Start the frontend development server:
+```bash
+npm start
+```
+
+The frontend will run on http://localhost:3000 and will proxy API requests to the backend.
+
+## Dashboard (Pie Chart for Centres)
+
+A dashboard feature with a pie chart showing the distribution of plans by centre is planned but not currently implemented in the codebase. When available, it will visualize the number of plans per centre using data from the backend.
+
 ## Features
 
 - Plan classes for 9 months (July to March)
@@ -98,4 +121,5 @@ POST /api/generate-gantt
 - Generate Gantt chart visualization
 - Download Gantt chart as PNG image
 - RESTful API endpoints for plan management
-- Dockerized application for easy deployment 
+- Dockerized application for easy deployment
+- **Planned:** Dashboard with pie chart for centres 
