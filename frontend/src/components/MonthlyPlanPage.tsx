@@ -139,6 +139,7 @@ const MonthlyPlanPage: React.FC = () => {
       }
 
       const requestData = {
+        ...userDetails,
         start_month: selectedMonth,
         end_month: selectedMonth,
         monthly_plans: [{
