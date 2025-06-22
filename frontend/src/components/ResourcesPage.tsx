@@ -105,10 +105,152 @@ const knowledgePitstopRubrics = {
   how: `When assessing students, understanding evaluates their grasp of concepts, like identifying letter sounds in phonics. Accuracy checks the correctness of their answers, such as writing the correct sounds for given letters. Effort measures their diligence, like attempting all parts of a question even if some answers are wrong. For example, if a student writes "c–a–t" for "cat" with some errors but tries every part, they may score well on effort, partial on understanding, and moderate on accuracy, providing a comprehensive evaluation.`
 };
 
+const literacyLevels = [
+  {
+    level: 'Letter Level',
+    color: '#4caf50',
+    description: 'Foundation of reading and writing through letter recognition and phonics',
+    prerequisites: 'None - This is the starting level for all students',
+    coverage: [
+      'Alphabet recognition (uppercase and lowercase)',
+      'Letter-sound correspondences (phonics)',
+      'Beginning, middle, and ending sounds in words',
+      'Simple CVC words (cat, pin, bug)',
+      'Consonant blends and vowel digraphs',
+      'Basic sight words and vocabulary building'
+    ],
+    redFlags: 'All students begin at Letter Level regardless of their current abilities. Teachers should adapt instruction to meet each child where they are.'
+  },
+  {
+    level: 'Word Level',
+    color: '#2196f3',
+    description: 'Building vocabulary and understanding word structure and grammar',
+    prerequisites: 'Letter Level completion - solid phonics foundation required',
+    coverage: [
+      'Parts of speech (nouns, pronouns, verbs, adjectives)',
+      'Articles (a, an, the) and their usage',
+      'Simple sentence construction',
+      'Conversational skills and greetings',
+      'Subject-verb agreement',
+      'Prepositions and WH questions'
+    ],
+    placementIndicators: {
+      ready: [
+        'Can read simple CVC words independently',
+        'Knows most letter sounds confidently',
+        'Can blend sounds to make words',
+        'Recognizes 20-30 sight words',
+        'Can write simple words with minimal help'
+      ],
+      needsPrevious: [
+        'Struggles with basic phonics (letter sounds)',
+        'Cannot read simple 3-letter words',
+        'Knows fewer than 10 sight words',
+        'Cannot write recognizable letters consistently'
+      ]
+    },
+    redFlags: 'Without solid phonics skills from Letter Level, children will struggle with word formation and reading comprehension at this level.'
+  },
+  {
+    level: 'Sentence Level',
+    color: '#ff9800',
+    description: 'Constructing sentences and understanding grammar rules',
+    prerequisites: 'Word Level completion - must understand basic parts of speech',
+    coverage: [
+      'Subject and predicate identification',
+      'Simple, compound, and complex sentences',
+      'Following and giving multi-step instructions',
+      'Contractions and possessive forms',
+      'Punctuation (periods, commas, question marks)',
+      'Past, present, and future tenses',
+      'Turn-taking in conversations'
+    ],
+    placementIndicators: {
+      ready: [
+        'Can identify nouns, verbs, and adjectives in sentences',
+        'Uses articles (a, an, the) correctly most of the time',
+        'Can construct simple 4-5 word sentences',
+        'Understands basic grammar rules',
+        'Can hold simple conversations'
+      ],
+      needsPrevious: [
+        'Cannot identify basic parts of speech',
+        'Struggles with simple sentence formation',
+        'Doesn\'t understand articles or pronouns',
+        'Cannot engage in basic conversations'
+      ]
+    },
+    redFlags: 'Children who cannot form basic sentences or identify parts of speech need more time at Word Level to build grammar foundations.'
+  },
+  {
+    level: 'Story Level',
+    color: '#9c27b0',
+    description: 'Reading comprehension, storytelling, and advanced language skills',
+    prerequisites: 'Sentence Level completion - must be able to construct varied sentence types',
+    coverage: [
+      'Understanding idioms and metaphors',
+      'Converting between affirmative and negative sentences',
+      'Advanced tense usage and writing prompts',
+      'Voice modulation and expression',
+      'Story structure (beginning, middle, end)',
+      'Character and plot development',
+      'Presentation skills and active listening'
+    ],
+    placementIndicators: {
+      ready: [
+        'Can write and speak in complete sentences confidently',
+        'Understands different sentence types',
+        'Can use punctuation correctly',
+        'Can follow multi-step instructions',
+        'Shows interest in storytelling'
+      ],
+      needsPrevious: [
+        'Still struggles with basic sentence construction',
+        'Cannot use punctuation correctly',
+        'Doesn\'t understand different tenses',
+        'Cannot follow simple instructions'
+      ]
+    },
+    redFlags: 'Students who cannot construct proper sentences or understand basic grammar concepts will struggle with story comprehension and creation.'
+  },
+  {
+    level: 'Advanced Level',
+    color: '#795548',
+    description: 'Complex language skills, advanced grammar, and literary analysis',
+    prerequisites: 'Story Level completion - must be comfortable with storytelling and presentations',
+    coverage: [
+      'Complex idioms, metaphors, and similes',
+      'All tense forms (present, past, future with variations)',
+      'Advanced sentence types and voice modulation',
+      'Paragraph structure and essay writing',
+      'Plot development and character creation',
+      'Advanced presentation skills with visual aids',
+      'Critical thinking and literary analysis'
+    ],
+    placementIndicators: {
+      ready: [
+        'Can tell coherent stories with clear structure',
+        'Uses varied sentence types and punctuation',
+        'Understands basic story elements',
+        'Can present ideas clearly to others',
+        'Shows advanced vocabulary usage'
+      ],
+      needsPrevious: [
+        'Cannot tell simple stories coherently',
+        'Limited sentence variety and structure',
+        'Basic vocabulary and expression issues',
+        'Struggles with presentations or explanations'
+      ]
+    },
+    redFlags: 'Students need strong storytelling abilities and presentation skills before attempting advanced literary concepts and complex writing tasks.'
+  }
+];
+
 const ResourcesPage: React.FC = () => {
   const [showBasics, setShowBasics] = useState(false);
   const [showStrategies, setShowStrategies] = useState(false);
   const [showRubrics, setShowRubrics] = useState(false);
+  const [showLiteracyLevels, setShowLiteracyLevels] = useState(false);
 
   return (
     <Container maxWidth="lg">
@@ -150,7 +292,7 @@ const ResourcesPage: React.FC = () => {
         </Box>
 
         <Grid container spacing={3} sx={{ mb: 4, width: '100%', maxWidth: 900 }}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
                 cursor: 'pointer',
@@ -159,7 +301,7 @@ const ResourcesPage: React.FC = () => {
                 boxShadow: showBasics ? 6 : 2,
                 transition: 'all 0.2s',
               }}
-              onClick={() => { setShowBasics(true); setShowStrategies(false); setShowRubrics(false); }}
+              onClick={() => { setShowBasics(true); setShowStrategies(false); setShowRubrics(false); setShowLiteracyLevels(false); }}
             >
               <CardContent>
                 <Typography variant="h5" sx={{ fontWeight: 600, color: 'primary.main', mb: 1 }}>
@@ -171,7 +313,7 @@ const ResourcesPage: React.FC = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
                 cursor: 'pointer',
@@ -180,7 +322,7 @@ const ResourcesPage: React.FC = () => {
                 boxShadow: showStrategies ? 6 : 2,
                 transition: 'all 0.2s',
               }}
-              onClick={() => { setShowStrategies(true); setShowBasics(false); setShowRubrics(false); }}
+              onClick={() => { setShowStrategies(true); setShowBasics(false); setShowRubrics(false); setShowLiteracyLevels(false); }}
             >
               <CardContent>
                 <Typography variant="h5" sx={{ fontWeight: 600, color: '#1976d2', mb: 1 }}>
@@ -192,7 +334,7 @@ const ResourcesPage: React.FC = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
                 cursor: 'pointer',
@@ -201,7 +343,7 @@ const ResourcesPage: React.FC = () => {
                 boxShadow: showRubrics ? 6 : 2,
                 transition: 'all 0.2s',
               }}
-              onClick={() => { setShowRubrics(true); setShowBasics(false); setShowStrategies(false); }}
+              onClick={() => { setShowRubrics(true); setShowBasics(false); setShowStrategies(false); setShowLiteracyLevels(false); }}
             >
               <CardContent>
                 <Typography variant="h5" sx={{ fontWeight: 600, color: '#8e24aa', mb: 1 }}>
@@ -213,7 +355,27 @@ const ResourcesPage: React.FC = () => {
               </CardContent>
             </Card>
           </Grid>
-          {/* Add more resource cards here if needed */}
+          <Grid item xs={12} sm={6} md={3}>
+            <Card
+              sx={{
+                cursor: 'pointer',
+                background: showLiteracyLevels ? 'linear-gradient(45deg, #c8e6c9 30%, #fff 90%)' : 'rgba(255,255,255,0.95)',
+                border: showLiteracyLevels ? '2px solid #4caf50' : '1px solid #e0e0e0',
+                boxShadow: showLiteracyLevels ? 6 : 2,
+                transition: 'all 0.2s',
+              }}
+              onClick={() => { setShowLiteracyLevels(true); setShowBasics(false); setShowStrategies(false); setShowRubrics(false); }}
+            >
+              <CardContent>
+                <Typography variant="h5" sx={{ fontWeight: 600, color: '#4caf50', mb: 1 }}>
+                  Foundational Literacy Level Guide
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Placement guide for literacy levels and student assessment
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
 
         {showBasics && (
@@ -303,6 +465,142 @@ const ResourcesPage: React.FC = () => {
               <Typography variant="body1" sx={{ fontStyle: 'italic', color: '#333' }}>
                 {knowledgePitstopRubrics.how}
               </Typography>
+            </Box>
+          </Paper>
+        )}
+
+        {showLiteracyLevels && (
+          <Paper elevation={4} sx={{ p: 4, maxWidth: 1200, width: '100%', mb: 4, background: 'rgba(255,255,255,0.98)' }}>
+            <Typography variant="h4" sx={{ fontWeight: 700, color: '#4caf50', mb: 3, textAlign: 'center' }}>
+              Foundational Literacy Level Guide
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 4, color: '#333', textAlign: 'center', fontSize: '1.1rem' }}>
+              This guide helps you assess which literacy level is appropriate for each student. Each level builds on the previous one, 
+              so it's crucial to ensure students have mastered the prerequisites before advancing.
+            </Typography>
+            
+            <Grid container spacing={3}>
+              {literacyLevels.map((level, idx) => (
+                <Grid item xs={12} key={level.level}>
+                  <Paper 
+                    elevation={3} 
+                    sx={{ 
+                      p: 3, 
+                      mb: 2, 
+                      background: `linear-gradient(45deg, ${level.color}20 30%, #fff 90%)`,
+                      border: `2px solid ${level.color}`,
+                      borderRadius: 2
+                    }}
+                  >
+                    <Typography variant="h5" sx={{ fontWeight: 700, color: level.color, mb: 2, display: 'flex', alignItems: 'center' }}>
+                      <Box sx={{ 
+                        width: 32, 
+                        height: 32, 
+                        borderRadius: '50%', 
+                        backgroundColor: level.color, 
+                        color: 'white', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center', 
+                        fontWeight: 700, 
+                        mr: 2 
+                      }}>
+                        {idx + 1}
+                      </Box>
+                      {level.level}
+                    </Typography>
+                    
+                    <Typography variant="body1" sx={{ mb: 2, fontStyle: 'italic', color: '#555' }}>
+                      {level.description}
+                    </Typography>
+                    
+                    <Box sx={{ mb: 3 }}>
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: '#333', mb: 1 }}>
+                        Prerequisites:
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#666', mb: 2 }}>
+                        {level.prerequisites}
+                      </Typography>
+                    </Box>
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} md={level.placementIndicators ? 4 : 12}>
+                        <Box sx={{ background: '#fff', p: 2, borderRadius: 1, border: '1px solid #e0e0e0' }}>
+                          <Typography variant="h6" sx={{ fontWeight: 600, color: level.color, mb: 1 }}>
+                            Topics Covered:
+                          </Typography>
+                          <ul style={{ margin: 0, paddingLeft: 20 }}>
+                            {level.coverage.map((topic, i) => (
+                              <li key={i} style={{ marginBottom: 4, fontSize: '0.9rem' }}>{topic}</li>
+                            ))}
+                          </ul>
+                        </Box>
+                      </Grid>
+                      
+                      {level.placementIndicators && (
+                        <>
+                          <Grid item xs={12} md={4}>
+                            <Box sx={{ background: '#e8f5e8', p: 2, borderRadius: 1, border: '1px solid #4caf50' }}>
+                              <Typography variant="h6" sx={{ fontWeight: 600, color: '#2e7d32', mb: 1 }}>
+                                ✓ Ready for this level if student:
+                              </Typography>
+                              <ul style={{ margin: 0, paddingLeft: 20 }}>
+                                {level.placementIndicators.ready.map((indicator, i) => (
+                                  <li key={i} style={{ marginBottom: 4, fontSize: '0.9rem' }}>{indicator}</li>
+                                ))}
+                              </ul>
+                            </Box>
+                          </Grid>
+                          
+                          <Grid item xs={12} md={4}>
+                            <Box sx={{ background: '#fff3e0', p: 2, borderRadius: 1, border: '1px solid #ff9800' }}>
+                              <Typography variant="h6" sx={{ fontWeight: 600, color: '#e65100', mb: 1 }}>
+                                ⚠ Needs previous level if student:
+                              </Typography>
+                              <ul style={{ margin: 0, paddingLeft: 20 }}>
+                                {level.placementIndicators.needsPrevious?.map((indicator, i) => (
+                                  <li key={i} style={{ marginBottom: 4, fontSize: '0.9rem' }}>{indicator}</li>
+                                ))}
+                              </ul>
+                            </Box>
+                          </Grid>
+                        </>
+                      )}
+                    </Grid>
+                    
+                    <Box sx={{ mt: 2, p: 2, background: '#ffebee', borderRadius: 1, border: '1px solid #f44336' }}>
+                      <Typography variant="subtitle2" sx={{ fontWeight: 600, color: '#c62828', mb: 1 }}>
+                        🚩 Red Flag - Placement Concern:
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: '#d32f2f' }}>
+                        {level.redFlags}
+                      </Typography>
+                    </Box>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+            
+            <Box sx={{ mt: 4, p: 3, background: '#e3f2fd', borderRadius: 2, border: '2px solid #1976d2' }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, color: '#1565c0', mb: 2 }}>
+                💡 Quick Assessment Tips:
+              </Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <Typography variant="body2" sx={{ mb: 1, fontWeight: 600 }}>• Letter Level Assessment:</Typography>
+                  <Typography variant="body2" sx={{ mb: 2, ml: 2 }}>Ask child to identify 10 random letters and their sounds</Typography>
+                  
+                  <Typography variant="body2" sx={{ mb: 1, fontWeight: 600 }}>• Word Level Assessment:</Typography>
+                  <Typography variant="body2" sx={{ mb: 2, ml: 2 }}>Have them read simple CVC words (cat, dog, run) and identify parts of speech</Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Typography variant="body2" sx={{ mb: 1, fontWeight: 600 }}>• Sentence Level Assessment:</Typography>
+                  <Typography variant="body2" sx={{ mb: 2, ml: 2 }}>Ask them to construct a sentence and identify subject/predicate</Typography>
+                  
+                  <Typography variant="body2" sx={{ mb: 1, fontWeight: 600 }}>• Story Level Assessment:</Typography>
+                  <Typography variant="body2" sx={{ mb: 2, ml: 2 }}>Have them tell a simple story with beginning, middle, and end</Typography>
+                </Grid>
+              </Grid>
             </Box>
           </Paper>
         )}
