@@ -9,7 +9,6 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
-      - /app/venv
     environment:
       - PYTHONUNBUFFERED=1
       - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/postgres
@@ -23,12 +22,12 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "3001:80"
     volumes:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      - REACT_APP_API_URL=https://classplan.rayansheikh.space/api/
+      - REACT_APP_API_URL=http://backend:8000
     depends_on:
       - backend
     networks:
@@ -45,7 +44,9 @@ services:
       - "5432:5432"
     networks:
       - app-network
+    volumes:
+      - /var/lib/classplan/postgres-data:/var/lib/postgresql/data
 
 networks:
   app-network:
-    driver: bridge 
+    driver: bridge
