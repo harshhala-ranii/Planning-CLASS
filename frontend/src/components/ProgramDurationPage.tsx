@@ -15,6 +15,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from './U&I Logo - Red.png';
+import { buildApiUrl } from '../config';
 
 const ProgramDurationPage: React.FC = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const ProgramDurationPage: React.FC = () => {
       }
 
       // Update the user details with the selected duration
-      await axios.post('http://localhost:8000/api/user-details/duration', { duration });
+      await axios.post(buildApiUrl('user-details/duration'), { duration });
       navigate('/options');
     } catch (error) {
       console.error('Error saving duration:', error);

@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from './U&I Logo - Red.png';
 import { useUserDetails } from '../UserDetailsContext';
+import { buildApiUrl } from '../config';
 
 interface ProgramLevels {
   'Foundational Literacy': string[];
@@ -95,7 +96,7 @@ const UserDetailsPage: React.FC = () => {
         return;
       }
 
-      await axios.post('http://localhost:8000/api/user-details', formData);
+      await axios.post(buildApiUrl('user-details'), formData);
       setUserDetails(formData);
       navigate('/options');
     } catch (error) {

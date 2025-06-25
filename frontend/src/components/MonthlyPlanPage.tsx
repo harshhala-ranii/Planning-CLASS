@@ -22,6 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import logo from './U&I Logo - Red.png';
 import { useUserDetails } from '../UserDetailsContext';
+import { buildApiUrl } from '../config';
 
 interface MonthlyPlan {
   [month: string]: {
@@ -74,7 +75,7 @@ const MonthlyPlanPage: React.FC = () => {
       const program = userDetails.program || 'Foundational Literacy';
       const level = userDetails.level || 'Letter Level';
       const duration = mapDuration(userDetails.duration || 'full');
-      const response = await axios.get('http://localhost:8000/api/recommended-topics', {
+      const response = await axios.get(buildApiUrl('recommended-topics'), {
         params: {
           program,
           level,
@@ -151,7 +152,7 @@ const MonthlyPlanPage: React.FC = () => {
         }]
       };
 
-      const response = await axios.post('http://localhost:8000/api/generate-gantt', requestData, {
+      const response = await axios.post(buildApiUrl('generate-gantt'), requestData, {
         responseType: 'blob'
       });
       
