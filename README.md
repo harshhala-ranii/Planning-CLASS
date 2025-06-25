@@ -18,6 +18,21 @@ To stop the application:
 docker-compose down
 ```
 
+### API URL Configuration
+
+The frontend is configured to use the API URL from the environment variable `REACT_APP_API_URL` set in `docker-compose.yml`. 
+
+Current configuration:
+- **Production URL**: `https://classplan.rayansheikh.space/api/`
+- **Fallback URL**: `https://classplan.rayansheikh.space/api`
+
+To change the API URL, update the `REACT_APP_API_URL` environment variable in the `docker-compose.yml` file:
+
+```yaml
+environment:
+  - REACT_APP_API_URL=https://your-domain.com/api/
+```
+
 ## Manual Setup
 
 ### Backend Setup
@@ -108,7 +123,9 @@ npm install
 npm start
 ```
 
-The frontend will run on http://localhost:3000 and will proxy API requests to the backend.
+The frontend will run on http://localhost:3000 and will make API requests to the configured backend URL.
+
+**Note**: When running in development mode, make sure the `REACT_APP_API_URL` environment variable is set correctly, or the frontend will use the fallback URL `https://classplan.rayansheikh.space/api`.
 
 ## Dashboard (Pie Chart for Centres)
 
@@ -122,4 +139,23 @@ A dashboard feature with a pie chart showing the distribution of plans by centre
 - Download Gantt chart as PNG image
 - RESTful API endpoints for plan management
 - Dockerized application for easy deployment
-- **Planned:** Dashboard with pie chart for centres 
+- Configurable API URL via environment variables
+- **Planned:** Dashboard with pie chart for centres
+
+## Configuration
+
+### Environment Variables
+
+The application uses the following environment variables:
+
+#### Frontend
+- `REACT_APP_API_URL`: The base URL for API requests (default: `https://classplan.rayansheikh.space/api`)
+
+#### Backend  
+- `DATABASE_URL`: PostgreSQL database connection string
+- `PYTHONUNBUFFERED`: Set to 1 for unbuffered Python output
+
+### Configuration Files
+
+- `frontend/src/config.ts`: Contains API URL configuration and helper functions
+- `docker-compose.yml`: Environment variables and service configuration 

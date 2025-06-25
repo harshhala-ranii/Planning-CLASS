@@ -17,6 +17,7 @@ import axios from 'axios';
 import logo from './U&I Logo - Red.png';
 import { useUserDetails } from '../UserDetailsContext';
 import { useNavigate } from 'react-router-dom';
+import { buildApiUrl } from '../config';
 
 interface WeekPlan {
   week_number: number;
@@ -84,7 +85,7 @@ const ClassPlanner: React.FC = () => {
       plan: plan,
     };
     try {
-      const response = await axios.post('http://localhost:8000/api/generate-gantt', payload, {
+      const response = await axios.post(buildApiUrl('generate-gantt'), payload, {
         responseType: 'blob'
       });
       const url = window.URL.createObjectURL(new Blob([response.data]));
