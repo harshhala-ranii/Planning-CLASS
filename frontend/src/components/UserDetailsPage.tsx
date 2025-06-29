@@ -117,7 +117,8 @@ const UserDetailsPage: React.FC = () => {
       <Box
         sx={{
           minHeight: '100vh',
-          py: 4,
+          py: { xs: 2, sm: 4 },
+          px: { xs: 2, sm: 0 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -129,19 +130,21 @@ const UserDetailsPage: React.FC = () => {
           src={logo}
           alt="U&I Logo"
           sx={{
-            width: 200,
-            mb: 4,
+            width: { xs: 150, sm: 180, md: 200 },
+            height: 'auto',
+            mb: { xs: 2, sm: 4 },
           }}
         />
 
         <Paper
           elevation={3}
           sx={{
-            p: 4,
+            p: { xs: 2, sm: 3, md: 4 },
             width: '100%',
             maxWidth: 600,
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
+            borderRadius: { xs: 2, md: 3 },
           }}
         >
           <Typography
@@ -152,13 +155,14 @@ const UserDetailsPage: React.FC = () => {
               textAlign: 'center',
               color: 'primary.main',
               fontWeight: 600,
-              mb: 4,
+              mb: { xs: 3, md: 4 },
+              fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
             }}
           >
             Enter Your Details
           </Typography>
 
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: 3 } }}>
             <TextField
               label="Name"
               name="name"
@@ -255,18 +259,18 @@ const UserDetailsPage: React.FC = () => {
               </FormControl>
             )}
 
-            <Alert severity="info" sx={{ mb: 2 }}>
-              <Typography variant="body2" sx={{ fontWeight: 500 }}>
+            <Alert severity="info" sx={{ mb: { xs: 1.5, md: 2 } }}>
+              <Typography variant="body2" sx={{ fontWeight: 500, fontSize: { xs: '0.875rem', md: '0.875rem' } }}>
                 Important: Please consult with your leader before selecting the program duration.
                 This decision should be based on the student's learning pace and capabilities.
               </Typography>
             </Alert>
 
-            <Box sx={{ mb: 2 }}>
-              <Typography variant="body2" color="text.secondary" paragraph>
+            <Box sx={{ mb: { xs: 1.5, md: 2 } }}>
+              <Typography variant="body2" color="text.secondary" paragraph sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}>
                 Consider the following factors when selecting the duration:
               </Typography>
-              <Typography component="ul" variant="body2" color="text.secondary" sx={{ pl: 2 }}>
+              <Typography component="ul" variant="body2" color="text.secondary" sx={{ pl: 2, fontSize: { xs: '0.8rem', md: '0.875rem' } }}>
                 <li>Student's current learning pace and capabilities</li>
                 <li>Previous performance in similar programs</li>
                 <li>Available time for practice and reinforcement</li>
@@ -296,14 +300,17 @@ const UserDetailsPage: React.FC = () => {
               color="primary"
               onClick={handleSubmit}
               size="large"
+              fullWidth
               sx={{
-                mt: 2,
-                py: 1.5,
-                fontSize: '1.1rem',
+                mt: { xs: 2, md: 2 },
+                py: { xs: 1.2, md: 1.5 },
+                fontSize: { xs: '1rem', md: '1.1rem' },
                 boxShadow: '0 4px 6px rgba(211, 47, 47, 0.2)',
                 '&:hover': {
                   boxShadow: '0 6px 8px rgba(211, 47, 47, 0.3)',
+                  transform: { xs: 'none', md: 'translateY(-1px)' },
                 },
+                transition: 'all 0.2s',
               }}
             >
               Continue

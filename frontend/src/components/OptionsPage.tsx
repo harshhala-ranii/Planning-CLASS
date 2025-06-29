@@ -38,16 +38,17 @@ const OptionsPage: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          py: 8,
+          py: { xs: 4, sm: 6, md: 8 },
+          px: { xs: 2, sm: 0 },
           background: 'linear-gradient(45deg, #fff5f5 30%, #ffffff 90%)',
         }}
       >
-        <Box sx={{ mb: 4, textAlign: 'center' }}>
+        <Box sx={{ mb: { xs: 3, md: 4 }, textAlign: 'center' }}>
           <img 
             src={logo} 
             alt="U&I Logo" 
             style={{ 
-              maxWidth: '150px',
+              maxWidth: '120px',
               height: 'auto',
               marginBottom: '1rem'
             }} 
@@ -63,19 +64,21 @@ const OptionsPage: React.FC = () => {
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              px: { xs: 1, md: 0 },
             }}
           >
             Choose Your Planning Option
           </Typography>
         </Box>
 
-        <Grid container spacing={4} sx={{ maxWidth: 1200 }}>
+        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ maxWidth: 1200, width: '100%' }}>
           {options.map((option, index) => (
-            <Grid item xs={12} md={4} key={index}>
+            <Grid item xs={12} sm={6} md={4} key={index}>
               <Paper
                 elevation={3}
                 sx={{
-                  p: 4,
+                  p: { xs: 3, md: 4 },
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
@@ -83,34 +86,59 @@ const OptionsPage: React.FC = () => {
                   textAlign: 'center',
                   background: 'rgba(255, 255, 255, 0.9)',
                   backdropFilter: 'blur(10px)',
+                  borderRadius: { xs: 2, md: 3 },
                   transition: 'transform 0.2s, box-shadow 0.2s',
                   '&:hover': {
-                    transform: 'translateY(-4px)',
+                    transform: { xs: 'none', md: 'translateY(-4px)' },
                     boxShadow: '0 6px 12px rgba(211, 47, 47, 0.15)',
                   },
                 }}
               >
-                <Box sx={{ color: 'primary.main', mb: 2 }}>
-                  {option.icon}
+                <Box sx={{ color: 'primary.main', mb: { xs: 1.5, md: 2 } }}>
+                  <Box sx={{ fontSize: { xs: 32, md: 40 } }}>
+                    {option.icon}
+                  </Box>
                 </Box>
-                <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                <Typography 
+                  variant="h5" 
+                  component="h2" 
+                  gutterBottom 
+                  sx={{ 
+                    fontWeight: 600,
+                    fontSize: { xs: '1.25rem', md: '1.5rem' },
+                    mb: { xs: 1, md: 1 },
+                  }}
+                >
                   {option.title}
                 </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                <Typography 
+                  variant="body1" 
+                  color="text.secondary" 
+                  sx={{ 
+                    mb: { xs: 2, md: 3 },
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    lineHeight: 1.5,
+                  }}
+                >
                   {option.description}
                 </Typography>
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={() => navigate(option.path)}
+                  fullWidth
                   sx={{ 
                     mt: 'auto',
-                    px: 4,
-                    py: 1.5,
+                    px: { xs: 3, md: 4 },
+                    py: { xs: 1.2, md: 1.5 },
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    maxWidth: { xs: '100%', sm: '200px' },
                     boxShadow: '0 4px 6px rgba(211, 47, 47, 0.2)',
                     '&:hover': {
                       boxShadow: '0 6px 8px rgba(211, 47, 47, 0.3)',
+                      transform: { xs: 'none', md: 'translateY(-1px)' },
                     },
+                    transition: 'all 0.2s',
                   }}
                 >
                   Get Started

@@ -172,35 +172,61 @@ const MonthlyPlanPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       {/* User Details Summary Card */}
-      <Box sx={{ my: 2 }}>
-        <Paper elevation={2} sx={{ p: 2, mb: 2, background: 'rgba(255,255,255,0.95)' }}>
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+      <Box sx={{ my: { xs: 1, md: 2 }, px: { xs: 1, sm: 0 } }}>
+        <Paper elevation={2} sx={{ 
+          p: { xs: 2, md: 2 }, 
+          mb: { xs: 1, md: 2 }, 
+          background: 'rgba(255,255,255,0.95)',
+          borderRadius: { xs: 2, md: 3 }
+        }}>
+          <Typography variant="h6" sx={{ 
+            fontWeight: 600, 
+            mb: { xs: 1, md: 1 },
+            fontSize: { xs: '1.1rem', md: '1.25rem' }
+          }}>
             User Details
           </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-            <Typography variant="body1"><b>Name:</b> {userDetails.name || '-'}</Typography>
-            <Typography variant="body1"><b>Centre:</b> {userDetails.centre_name || '-'}</Typography>
-            <Typography variant="body1"><b>Program:</b> {userDetails.program || '-'}</Typography>
-            <Typography variant="body1"><b>Level:</b> {userDetails.level || '-'}</Typography>
-            <Typography variant="body1"><b>Duration:</b> {userDetails.duration === 'half' ? 'Half Year (5 months)' : userDetails.duration === 'full' ? 'Full Year (9 months)' : '-'}</Typography>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', sm: 'row' },
+            flexWrap: 'wrap', 
+            gap: { xs: 1, sm: 2, md: 3 }
+          }}>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Name:</b> {userDetails.name || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Centre:</b> {userDetails.centre_name || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Program:</b> {userDetails.program || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Level:</b> {userDetails.level || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Duration:</b> {userDetails.duration === 'half' ? 'Half Year (5 months)' : userDetails.duration === 'full' ? 'Full Year (9 months)' : '-'}
+            </Typography>
             {userDetails.grade && (
-              <Typography variant="body1"><b>Grade:</b> {userDetails.grade}</Typography>
+              <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+                <b>Grade:</b> {userDetails.grade}
+              </Typography>
             )}
           </Box>
         </Paper>
       </Box>
-      <Box sx={{ my: 4 }}>
+      <Box sx={{ my: { xs: 2, md: 4 }, px: { xs: 1, sm: 0 } }}>
         <Box sx={{ 
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center', 
-          mb: 4 
+          mb: { xs: 3, md: 4 }
         }}>
           <img 
             src={logo} 
             alt="U&I Logo" 
             style={{ 
-              maxWidth: '150px',
+              maxWidth: '120px',
               height: 'auto',
               marginBottom: '1rem'
             }} 
@@ -217,6 +243,8 @@ const MonthlyPlanPage: React.FC = () => {
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              px: { xs: 1, md: 0 },
             }}
           >
             Monthly Class Planning
@@ -226,20 +254,24 @@ const MonthlyPlanPage: React.FC = () => {
         <Paper 
           elevation={3} 
           sx={{ 
-            p: 3, 
-            mb: 3,
+            p: { xs: 2, sm: 3 }, 
+            mb: { xs: 2, md: 3 },
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
+            borderRadius: { xs: 2, md: 3 },
           }}
         >
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: { xs: 3, md: 4 } }}>
             <FormControl fullWidth>
-              <InputLabel id="month-select-label">Select Month</InputLabel>
+              <InputLabel id="month-select-label" sx={{ fontSize: { xs: '0.9rem', md: '1rem' } }}>
+                Select Month
+              </InputLabel>
               <Select
                 labelId="month-select-label"
                 value={selectedMonth}
                 label="Select Month"
                 onChange={handleMonthChange}
+                size={window.innerWidth < 600 ? 'small' : 'medium'}
                 sx={{
                   '& .MuiOutlinedInput-notchedOutline': {
                     borderColor: 'primary.main',
@@ -247,10 +279,11 @@ const MonthlyPlanPage: React.FC = () => {
                   '&:hover .MuiOutlinedInput-notchedOutline': {
                     borderColor: 'primary.dark',
                   },
+                  fontSize: { xs: '0.9rem', md: '1rem' },
                 }}
               >
                 {months.map((month) => (
-                  <MenuItem key={month} value={month}>
+                  <MenuItem key={month} value={month} sx={{ fontSize: { xs: '0.9rem', md: '1rem' } }}>
                     {month}
                   </MenuItem>
                 ))}
@@ -258,25 +291,38 @@ const MonthlyPlanPage: React.FC = () => {
             </FormControl>
           </Box>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 1, md: 2 }}>
             {['Week 1', 'Week 2', 'Week 3', 'Week 4'].map((week) => (
               <Grid item xs={12} key={week}>
                 <Paper
                   elevation={2}
                   sx={{
-                    p: 2,
+                    p: { xs: 1.5, md: 2 },
                     bgcolor: 'rgba(255, 255, 255, 0.9)',
                     cursor: 'pointer',
+                    borderRadius: { xs: 1.5, md: 2 },
                     '&:hover': {
                       bgcolor: 'rgba(211, 47, 47, 0.05)',
                     },
                   }}
                   onClick={() => handleWeekClick(week)}
                 >
-                  <Typography variant="h6" gutterBottom>
+                  <Typography 
+                    variant="h6" 
+                    gutterBottom 
+                    sx={{ 
+                      fontSize: { xs: '1.1rem', md: '1.25rem' },
+                      mb: { xs: 1, md: 1 }
+                    }}
+                  >
                     {week}
                   </Typography>
-                  <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+                  <Box sx={{ 
+                    display: 'flex', 
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    gap: { xs: 1, sm: 1 }, 
+                    mb: 1 
+                  }}>
                     <TextField
                       size="small"
                       placeholder="Add topic"
@@ -287,13 +333,24 @@ const MonthlyPlanPage: React.FC = () => {
                           handleTopicAdd(week);
                         }
                       }}
-                      sx={{ maxWidth: 300 }}
+                      sx={{ 
+                        flex: { xs: 1, sm: 'auto' },
+                        maxWidth: { xs: '100%', sm: 300 },
+                        '& .MuiInputBase-input': {
+                          fontSize: { xs: '0.875rem', md: '1rem' }
+                        }
+                      }}
                     />
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={() => handleTopicAdd(week)}
-                      sx={{ minWidth: 80 }}
+                      size="small"
+                      sx={{ 
+                        minWidth: { xs: 'auto', sm: 80 },
+                        px: { xs: 2, sm: 2 },
+                        fontSize: { xs: '0.8rem', md: '0.875rem' }
+                      }}
                     >
                       Add
                     </Button>
@@ -335,20 +392,29 @@ const MonthlyPlanPage: React.FC = () => {
           </Grid>
         </Paper>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center',
+          px: { xs: 2, sm: 0 },
+          mt: { xs: 3, md: 4 }
+        }}>
           <Button
             variant="contained"
             color="primary"
             onClick={handleGenerateGantt}
             size="large"
+            fullWidth
             sx={{ 
-              px: 6, 
-              py: 1.5,
-              fontSize: '1.1rem',
+              px: { xs: 4, md: 6 }, 
+              py: { xs: 1.2, md: 1.5 },
+              fontSize: { xs: '1rem', md: '1.1rem' },
+              maxWidth: { xs: '100%', sm: '300px' },
               boxShadow: '0 4px 6px rgba(211, 47, 47, 0.2)',
               '&:hover': {
                 boxShadow: '0 6px 8px rgba(211, 47, 47, 0.3)',
+                transform: { xs: 'none', md: 'translateY(-1px)' },
               },
+              transition: 'all 0.2s',
             }}
           >
             Generate Gantt Chart

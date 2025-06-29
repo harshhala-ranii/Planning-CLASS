@@ -260,16 +260,17 @@ const ResourcesPage: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          py: 8,
+          py: { xs: 4, sm: 6, md: 8 },
+          px: { xs: 2, sm: 0 },
           background: 'linear-gradient(45deg, #fff5f5 30%, #ffffff 90%)',
         }}
       >
-        <Box sx={{ mb: 4, textAlign: 'center' }}>
+        <Box sx={{ mb: { xs: 3, md: 4 }, textAlign: 'center' }}>
           <img 
             src={logo} 
             alt="U&I Logo" 
             style={{ 
-              maxWidth: '150px',
+              maxWidth: '120px',
               height: 'auto',
               marginBottom: '1rem'
             }} 
@@ -285,13 +286,15 @@ const ResourcesPage: React.FC = () => {
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              px: { xs: 1, md: 0 },
             }}
           >
             Resources for Class Planning
           </Typography>
         </Box>
 
-        <Grid container spacing={3} sx={{ mb: 4, width: '100%', maxWidth: 900 }}>
+        <Grid container spacing={{ xs: 2, md: 3 }} sx={{ mb: { xs: 3, md: 4 }, width: '100%', maxWidth: 900 }}>
           <Grid item xs={12} sm={6} md={3}>
             <Card
               sx={{
@@ -300,14 +303,28 @@ const ResourcesPage: React.FC = () => {
                 border: showBasics ? '2px solid #d32f2f' : '1px solid #e0e0e0',
                 boxShadow: showBasics ? 6 : 2,
                 transition: 'all 0.2s',
+                borderRadius: { xs: 2, md: 3 },
+                height: '100%',
               }}
               onClick={() => { setShowBasics(true); setShowStrategies(false); setShowRubrics(false); setShowLiteracyLevels(false); }}
             >
-              <CardContent>
-                <Typography variant="h5" sx={{ fontWeight: 600, color: 'primary.main', mb: 1 }}>
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    fontWeight: 600, 
+                    color: 'primary.main', 
+                    mb: 1,
+                    fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  }}
+                >
                   Basics
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}
+                >
                   Lesson structure, pedagogy, and core teaching steps
                 </Typography>
               </CardContent>
@@ -321,14 +338,29 @@ const ResourcesPage: React.FC = () => {
                 border: showStrategies ? '2px solid #1976d2' : '1px solid #e0e0e0',
                 boxShadow: showStrategies ? 6 : 2,
                 transition: 'all 0.2s',
+                borderRadius: { xs: 2, md: 3 },
+                height: '100%',
               }}
               onClick={() => { setShowStrategies(true); setShowBasics(false); setShowRubrics(false); setShowLiteracyLevels(false); }}
             >
-              <CardContent>
-                <Typography variant="h5" sx={{ fontWeight: 600, color: '#1976d2', mb: 1 }}>
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    fontWeight: 600, 
+                    color: '#1976d2', 
+                    mb: 1,
+                    fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+                    lineHeight: 1.2
+                  }}
+                >
                   Strategies for a Complete Learning Experience
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}
+                >
                   Key strategies for engaging and effective lessons
                 </Typography>
               </CardContent>
@@ -342,14 +374,29 @@ const ResourcesPage: React.FC = () => {
                 border: showRubrics ? '2px solid #8e24aa' : '1px solid #e0e0e0',
                 boxShadow: showRubrics ? 6 : 2,
                 transition: 'all 0.2s',
+                borderRadius: { xs: 2, md: 3 },
+                height: '100%',
               }}
               onClick={() => { setShowRubrics(true); setShowBasics(false); setShowStrategies(false); setShowLiteracyLevels(false); }}
             >
-              <CardContent>
-                <Typography variant="h5" sx={{ fontWeight: 600, color: '#8e24aa', mb: 1 }}>
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    fontWeight: 600, 
+                    color: '#8e24aa', 
+                    mb: 1,
+                    fontSize: { xs: '1.1rem', md: '1.25rem' },
+                    lineHeight: 1.2
+                  }}
+                >
                   Knowledge Pitstop Rubrics
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}
+                >
                   Rubrics for understanding, accuracy, and effort
                 </Typography>
               </CardContent>
@@ -363,14 +410,29 @@ const ResourcesPage: React.FC = () => {
                 border: showLiteracyLevels ? '2px solid #4caf50' : '1px solid #e0e0e0',
                 boxShadow: showLiteracyLevels ? 6 : 2,
                 transition: 'all 0.2s',
+                borderRadius: { xs: 2, md: 3 },
+                height: '100%',
               }}
               onClick={() => { setShowLiteracyLevels(true); setShowBasics(false); setShowStrategies(false); setShowRubrics(false); }}
             >
-              <CardContent>
-                <Typography variant="h5" sx={{ fontWeight: 600, color: '#4caf50', mb: 1 }}>
+              <CardContent sx={{ p: { xs: 2, md: 3 } }}>
+                <Typography 
+                  variant="h5" 
+                  sx={{ 
+                    fontWeight: 600, 
+                    color: '#4caf50', 
+                    mb: 1,
+                    fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+                    lineHeight: 1.2
+                  }}
+                >
                   Foundational Literacy Level Guide
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary"
+                  sx={{ fontSize: { xs: '0.85rem', md: '0.875rem' } }}
+                >
                   Placement guide for literacy levels and student assessment
                 </Typography>
               </CardContent>
@@ -379,7 +441,14 @@ const ResourcesPage: React.FC = () => {
         </Grid>
 
         {showBasics && (
-          <Paper elevation={4} sx={{ p: 4, maxWidth: 900, width: '100%', mb: 4, background: 'rgba(255,255,255,0.98)' }}>
+          <Paper elevation={4} sx={{ 
+            p: { xs: 2, sm: 3, md: 4 }, 
+            maxWidth: 900, 
+            width: '100%', 
+            mb: { xs: 3, md: 4 }, 
+            background: 'rgba(255,255,255,0.98)',
+            borderRadius: { xs: 2, md: 3 }
+          }}>
             <Typography variant="h4" sx={{ fontWeight: 700, color: 'primary.main', mb: 3, textAlign: 'center' }}>
               The Basics of a Great Lesson
             </Typography>

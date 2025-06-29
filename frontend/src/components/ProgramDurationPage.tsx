@@ -46,7 +46,8 @@ const ProgramDurationPage: React.FC = () => {
       <Box
         sx={{
           minHeight: '100vh',
-          py: 4,
+          py: { xs: 2, sm: 4 },
+          px: { xs: 2, sm: 0 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -58,19 +59,21 @@ const ProgramDurationPage: React.FC = () => {
           src={logo}
           alt="U&I Logo"
           sx={{
-            width: 200,
-            mb: 4,
+            width: { xs: 150, sm: 180, md: 200 },
+            height: 'auto',
+            mb: { xs: 2, sm: 4 },
           }}
         />
 
         <Paper
           elevation={3}
           sx={{
-            p: 4,
+            p: { xs: 2, sm: 3, md: 4 },
             width: '100%',
             maxWidth: 600,
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
+            borderRadius: { xs: 2, md: 3 },
           }}
         >
           <Typography
@@ -81,25 +84,43 @@ const ProgramDurationPage: React.FC = () => {
               textAlign: 'center',
               color: 'primary.main',
               fontWeight: 600,
-              mb: 4,
+              mb: { xs: 3, md: 4 },
+              fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
             }}
           >
             Select Program Duration
           </Typography>
 
-          <Alert severity="info" sx={{ mb: 4 }}>
-            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+          <Alert severity="info" sx={{ mb: { xs: 3, md: 4 } }}>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                fontWeight: 500,
+                fontSize: { xs: '0.875rem', md: '1rem' }
+              }}
+            >
               Important: Please consult with your leader before selecting the program duration.
               This decision should be based on the student's learning pace and capabilities.
             </Typography>
           </Alert>
 
-          <Box sx={{ mb: 4 }}>
-            <Typography variant="body1" paragraph>
+          <Box sx={{ mb: { xs: 3, md: 4 } }}>
+            <Typography 
+              variant="body1" 
+              paragraph 
+              sx={{ fontSize: { xs: '0.9rem', md: '1rem' } }}
+            >
               The program duration you select will determine the pace at which topics are covered.
               Consider the following factors:
             </Typography>
-            <Typography component="ul" sx={{ pl: 2 }}>
+            <Typography 
+              component="ul" 
+              sx={{ 
+                pl: 2,
+                fontSize: { xs: '0.85rem', md: '1rem' },
+                '& li': { mb: 0.5 }
+              }}
+            >
               <li>Student's current learning pace and capabilities</li>
               <li>Previous performance in similar programs</li>
               <li>Available time for practice and reinforcement</li>
@@ -107,32 +128,59 @@ const ProgramDurationPage: React.FC = () => {
             </Typography>
           </Box>
 
-          <FormControl component="fieldset" sx={{ width: '100%', mb: 4 }}>
-            <FormLabel component="legend" sx={{ mb: 2, fontWeight: 600 }}>
+          <FormControl component="fieldset" sx={{ width: '100%', mb: { xs: 3, md: 4 } }}>
+            <FormLabel 
+              component="legend" 
+              sx={{ 
+                mb: { xs: 1.5, md: 2 }, 
+                fontWeight: 600,
+                fontSize: { xs: '1rem', md: '1.1rem' }
+              }}
+            >
               Choose Program Duration
             </FormLabel>
             <RadioGroup
               value={duration}
               onChange={handleDurationChange}
-              sx={{ gap: 2 }}
+              sx={{ gap: { xs: 1.5, md: 2 } }}
             >
               <Paper
                 elevation={1}
                 sx={{
-                  p: 2,
+                  p: { xs: 1.5, md: 2 },
                   border: duration === 'half' ? '2px solid #d32f2f' : '1px solid #e0e0e0',
-                  borderRadius: 2,
+                  borderRadius: { xs: 1.5, md: 2 },
+                  cursor: 'pointer',
+                  '&:hover': {
+                    bgcolor: 'rgba(211, 47, 47, 0.02)',
+                  },
                 }}
+                onClick={() => setDuration('half')}
               >
                 <FormControlLabel
                   value="half"
                   control={<Radio />}
+                  sx={{ margin: 0, width: '100%' }}
                   label={
-                    <Box>
-                      <Typography variant="h6" gutterBottom>
+                    <Box sx={{ ml: 1, width: '100%' }}>
+                      <Typography 
+                        variant="h6" 
+                        gutterBottom
+                        sx={{ 
+                          fontSize: { xs: '1.1rem', md: '1.25rem' },
+                          mb: { xs: 0.5, md: 1 }
+                        }}
+                      >
                         Half Year Program (5 months)
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography 
+                        variant="body2" 
+                        color="text.secondary"
+                        sx={{ 
+                          fontSize: { xs: '0.8rem', md: '0.875rem' },
+                          lineHeight: 1.4
+                        }}
+                      >
                         Recommended for students who learn quickly and have strong support systems.
                         Topics will be covered at a faster pace.
                       </Typography>
@@ -144,20 +192,40 @@ const ProgramDurationPage: React.FC = () => {
               <Paper
                 elevation={1}
                 sx={{
-                  p: 2,
+                  p: { xs: 1.5, md: 2 },
                   border: duration === 'full' ? '2px solid #d32f2f' : '1px solid #e0e0e0',
-                  borderRadius: 2,
+                  borderRadius: { xs: 1.5, md: 2 },
+                  cursor: 'pointer',
+                  '&:hover': {
+                    bgcolor: 'rgba(211, 47, 47, 0.02)',
+                  },
                 }}
+                onClick={() => setDuration('full')}
               >
                 <FormControlLabel
                   value="full"
                   control={<Radio />}
+                  sx={{ margin: 0, width: '100%' }}
                   label={
-                    <Box>
-                      <Typography variant="h6" gutterBottom>
+                    <Box sx={{ ml: 1, width: '100%' }}>
+                      <Typography 
+                        variant="h6" 
+                        gutterBottom
+                        sx={{ 
+                          fontSize: { xs: '1.1rem', md: '1.25rem' },
+                          mb: { xs: 0.5, md: 1 }
+                        }}
+                      >
                         Full Year Program (9 months)
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography 
+                        variant="body2" 
+                        color="text.secondary"
+                        sx={{ 
+                          fontSize: { xs: '0.8rem', md: '0.875rem' },
+                          lineHeight: 1.4
+                        }}
+                      >
                         Recommended for students who need more time to master concepts.
                         Provides more practice and reinforcement opportunities.
                       </Typography>
@@ -175,12 +243,14 @@ const ProgramDurationPage: React.FC = () => {
             size="large"
             fullWidth
             sx={{
-              py: 1.5,
-              fontSize: '1.1rem',
+              py: { xs: 1.2, md: 1.5 },
+              fontSize: { xs: '1rem', md: '1.1rem' },
               boxShadow: '0 4px 6px rgba(211, 47, 47, 0.2)',
               '&:hover': {
                 boxShadow: '0 6px 8px rgba(211, 47, 47, 0.3)',
+                transform: { xs: 'none', md: 'translateY(-1px)' },
               },
+              transition: 'all 0.2s',
             }}
           >
             Continue

@@ -137,35 +137,61 @@ const YearlyPlanPage: React.FC = () => {
   return (
     <Container maxWidth="lg">
       {/* User Details Summary Card */}
-      <Box sx={{ my: 2 }}>
-        <Paper elevation={2} sx={{ p: 2, mb: 2, background: 'rgba(255,255,255,0.95)' }}>
-          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+      <Box sx={{ my: { xs: 1, md: 2 }, px: { xs: 1, sm: 0 } }}>
+        <Paper elevation={2} sx={{ 
+          p: { xs: 2, md: 2 }, 
+          mb: { xs: 1, md: 2 }, 
+          background: 'rgba(255,255,255,0.95)',
+          borderRadius: { xs: 2, md: 3 }
+        }}>
+          <Typography variant="h6" sx={{ 
+            fontWeight: 600, 
+            mb: { xs: 1, md: 1 },
+            fontSize: { xs: '1.1rem', md: '1.25rem' }
+          }}>
             User Details
           </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
-            <Typography variant="body1"><b>Name:</b> {userDetails.name || '-'}</Typography>
-            <Typography variant="body1"><b>Centre:</b> {userDetails.centre_name || '-'}</Typography>
-            <Typography variant="body1"><b>Program:</b> {userDetails.program || '-'}</Typography>
-            <Typography variant="body1"><b>Level:</b> {userDetails.level || '-'}</Typography>
-            <Typography variant="body1"><b>Duration:</b> {userDetails.duration === 'half' ? 'Half Year (5 months)' : userDetails.duration === 'full' ? 'Full Year (9 months)' : '-'}</Typography>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', sm: 'row' },
+            flexWrap: 'wrap', 
+            gap: { xs: 1, sm: 2, md: 3 }
+          }}>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Name:</b> {userDetails.name || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Centre:</b> {userDetails.centre_name || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Program:</b> {userDetails.program || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Level:</b> {userDetails.level || '-'}
+            </Typography>
+            <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+              <b>Duration:</b> {userDetails.duration === 'half' ? 'Half Year (5 months)' : userDetails.duration === 'full' ? 'Full Year (9 months)' : '-'}
+            </Typography>
             {userDetails.grade && (
-              <Typography variant="body1"><b>Grade:</b> {userDetails.grade}</Typography>
+              <Typography variant="body1" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
+                <b>Grade:</b> {userDetails.grade}
+              </Typography>
             )}
           </Box>
         </Paper>
       </Box>
-      <Box sx={{ my: 4 }}>
+      <Box sx={{ my: { xs: 2, md: 4 }, px: { xs: 1, sm: 0 } }}>
         <Box sx={{ 
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center', 
-          mb: 4 
+          mb: { xs: 3, md: 4 }
         }}>
           <img 
             src={logo} 
             alt="U&I Logo" 
             style={{ 
-              maxWidth: '150px',
+              maxWidth: '120px',
               height: 'auto',
               marginBottom: '1rem'
             }} 
@@ -182,6 +208,8 @@ const YearlyPlanPage: React.FC = () => {
               textFillColor: 'transparent',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
+              px: { xs: 1, md: 0 },
             }}
           >
             Yearly Class Planning
@@ -191,21 +219,24 @@ const YearlyPlanPage: React.FC = () => {
         <Paper 
           elevation={3} 
           sx={{ 
-            p: 3, 
-            mb: 3,
+            p: { xs: 2, sm: 3 }, 
+            mb: { xs: 2, md: 3 },
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
+            borderRadius: { xs: 2, md: 3 },
           }}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
             {plan.monthly_plans.map((monthPlan, monthIndex) => (
-              <Grid item xs={12} md={4} key={monthPlan.month}>
+              <Grid item xs={12} sm={6} md={4} key={monthPlan.month}>
                 <Typography 
                   variant="h6" 
                   gutterBottom
                   sx={{
                     color: 'primary.main',
                     fontWeight: 600,
+                    fontSize: { xs: '1.1rem', md: '1.25rem' },
+                    mb: { xs: 1, md: 1 },
                   }}
                 >
                   {monthPlan.month}
@@ -214,9 +245,9 @@ const YearlyPlanPage: React.FC = () => {
                   <Box 
                     key={week.week_number} 
                     sx={{ 
-                      mb: 2,
-                      p: 2,
-                      borderRadius: 2,
+                      mb: { xs: 1.5, md: 2 },
+                      p: { xs: 1.5, md: 2 },
+                      borderRadius: { xs: 1.5, md: 2 },
                       bgcolor: 'background.paper',
                       boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
                       cursor: 'pointer',
@@ -228,8 +259,9 @@ const YearlyPlanPage: React.FC = () => {
                       variant="subtitle1"
                       sx={{
                         fontWeight: 600,
-                        mb: 1,
+                        mb: { xs: 0.5, md: 1 },
                         color: 'primary.dark',
+                        fontSize: { xs: '1rem', md: '1.1rem' },
                       }}
                     >
                       Week {week.week_number}
@@ -309,20 +341,29 @@ const YearlyPlanPage: React.FC = () => {
           </Grid>
         </Paper>
 
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center',
+          px: { xs: 2, sm: 0 },
+          mt: { xs: 3, md: 4 }
+        }}>
           <Button
             variant="contained"
             color="primary"
             onClick={handleGenerateGantt}
             size="large"
+            fullWidth
             sx={{ 
-              px: 6, 
-              py: 1.5,
-              fontSize: '1.1rem',
+              px: { xs: 4, md: 6 }, 
+              py: { xs: 1.2, md: 1.5 },
+              fontSize: { xs: '1rem', md: '1.1rem' },
+              maxWidth: { xs: '100%', sm: '320px' },
               boxShadow: '0 4px 6px rgba(211, 47, 47, 0.2)',
               '&:hover': {
                 boxShadow: '0 6px 8px rgba(211, 47, 47, 0.3)',
+                transform: { xs: 'none', md: 'translateY(-1px)' },
               },
+              transition: 'all 0.2s',
             }}
           >
             Generate Yearly Gantt Chart

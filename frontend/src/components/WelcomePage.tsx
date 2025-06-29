@@ -25,7 +25,8 @@ const WelcomePage: React.FC = () => {
       <Box
         sx={{
           minHeight: '100vh',
-          py: 4,
+          py: { xs: 2, sm: 4 },
+          px: { xs: 2, sm: 0 },
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -37,20 +38,21 @@ const WelcomePage: React.FC = () => {
           src={logo}
           alt="U&I Logo"
           sx={{
-            width: 200,
-            mb: 4,
+            width: { xs: 150, sm: 180, md: 200 },
+            height: 'auto',
+            mb: { xs: 2, sm: 4 },
           }}
         />
 
         <Paper
           elevation={3}
           sx={{
-            p: 6,
+            p: { xs: 3, sm: 4, md: 6 },
             width: '100%',
             maxWidth: 800,
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
-            borderRadius: 4,
+            borderRadius: { xs: 2, md: 4 },
             textAlign: 'center',
           }}
         >
@@ -61,26 +63,27 @@ const WelcomePage: React.FC = () => {
             sx={{
               color: 'primary.main',
               fontWeight: 700,
-              mb: 3,
-              fontSize: { xs: '2rem', md: '2.5rem' },
+              mb: { xs: 2, md: 3 },
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.5rem' },
             }}
           >
             Welcome to U&I Class Planning
           </Typography>
 
-          <Box sx={{ position: 'relative', mb: 6 }}>
+          <Box sx={{ position: 'relative', mb: { xs: 4, md: 6 } }}>
             <Typography
               variant="h1"
               sx={{
                 position: 'absolute',
-                left: 0,
-                top: -40,
-                fontSize: '4rem',
+                left: { xs: -10, md: 0 },
+                top: { xs: -25, md: -40 },
+                fontSize: { xs: '2.5rem', md: '4rem' },
                 color: 'primary.main',
                 opacity: 0.15,
                 fontWeight: 700,
                 zIndex: 0,
                 userSelect: 'none',
+                display: { xs: 'none', sm: 'block' },
               }}
               aria-hidden="true"
             >
@@ -92,10 +95,12 @@ const WelcomePage: React.FC = () => {
               sx={{
                 color: 'text.secondary',
                 fontStyle: 'italic',
-                px: 4,
+                px: { xs: 2, md: 4 },
                 position: 'relative',
                 zIndex: 1,
                 fontWeight: 500,
+                fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.5rem' },
+                lineHeight: 1.4,
               }}
             >
               It's the teacher that makes the difference, not the classroom.
@@ -104,14 +109,15 @@ const WelcomePage: React.FC = () => {
               variant="h1"
               sx={{
                 position: 'absolute',
-                right: 0,
-                bottom: -40,
-                fontSize: '4rem',
+                right: { xs: -10, md: 0 },
+                bottom: { xs: -25, md: -40 },
+                fontSize: { xs: '2.5rem', md: '4rem' },
                 color: 'primary.main',
                 opacity: 0.15,
                 fontWeight: 700,
                 zIndex: 0,
                 userSelect: 'none',
+                display: { xs: 'none', sm: 'block' },
               }}
               aria-hidden="true"
             >
@@ -123,18 +129,20 @@ const WelcomePage: React.FC = () => {
             variant="h6"
             sx={{
               color: 'text.secondary',
-              mb: 6,
+              mb: { xs: 4, md: 6 },
               fontWeight: 500,
+              fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+              px: { xs: 1, md: 0 },
             }}
           >
             Plan your classes effectively and make a lasting impact on your students' learning journey
           </Typography>
 
-          <Grid container spacing={4} sx={{ mb: 6 }}>
-            <Grid item xs={12} md={4}>
+          <Grid container spacing={{ xs: 2, md: 4 }} sx={{ mb: { xs: 4, md: 6 } }}>
+            <Grid item xs={12} sm={6} md={4}>
               <Box
                 sx={{
-                  p: 3,
+                  p: { xs: 2, md: 3 },
                   borderRadius: 2,
                   bgcolor: 'rgba(211, 47, 47, 0.05)',
                   height: '100%',
@@ -143,30 +151,31 @@ const WelcomePage: React.FC = () => {
                   alignItems: 'center',
                   transition: 'transform 0.2s',
                   '&:hover': {
-                    transform: 'translateY(-5px)',
+                    transform: { xs: 'none', md: 'translateY(-5px)' },
                   },
+                  textAlign: 'center',
                 }}
               >
                 <CalendarTodayIcon
                   sx={{
-                    fontSize: 40,
+                    fontSize: { xs: 32, md: 40 },
                     color: 'primary.main',
-                    mb: 2,
+                    mb: { xs: 1, md: 2 },
                   }}
                 />
-                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600, fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
                   Monthly Planning
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.9rem', md: '0.875rem' } }}>
                   Plan your classes week by week with detailed topic organization
                 </Typography>
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} sm={6} md={4}>
               <Box
                 sx={{
-                  p: 3,
+                  p: { xs: 2, md: 3 },
                   borderRadius: 2,
                   bgcolor: 'rgba(211, 47, 47, 0.05)',
                   height: '100%',
@@ -175,30 +184,31 @@ const WelcomePage: React.FC = () => {
                   alignItems: 'center',
                   transition: 'transform 0.2s',
                   '&:hover': {
-                    transform: 'translateY(-5px)',
+                    transform: { xs: 'none', md: 'translateY(-5px)' },
                   },
+                  textAlign: 'center',
                 }}
               >
                 <TimelineIcon
                   sx={{
-                    fontSize: 40,
+                    fontSize: { xs: 32, md: 40 },
                     color: 'primary.main',
-                    mb: 2,
+                    mb: { xs: 1, md: 2 },
                   }}
                 />
-                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600, fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
                   Yearly Planning
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.9rem', md: '0.875rem' } }}>
                   Get a comprehensive view of your entire academic year
                 </Typography>
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} sm={12} md={4}>
               <Box
                 sx={{
-                  p: 3,
+                  p: { xs: 2, md: 3 },
                   borderRadius: 2,
                   bgcolor: 'rgba(211, 47, 47, 0.05)',
                   height: '100%',
@@ -207,21 +217,22 @@ const WelcomePage: React.FC = () => {
                   alignItems: 'center',
                   transition: 'transform 0.2s',
                   '&:hover': {
-                    transform: 'translateY(-5px)',
+                    transform: { xs: 'none', md: 'translateY(-5px)' },
                   },
+                  textAlign: 'center',
                 }}
               >
                 <ListAltIcon
                   sx={{
-                    fontSize: 40,
+                    fontSize: { xs: 32, md: 40 },
                     color: 'primary.main',
-                    mb: 2,
+                    mb: { xs: 1, md: 2 },
                   }}
                 />
-                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                <Typography variant="h6" sx={{ mb: 1, fontWeight: 600, fontSize: { xs: '1.1rem', md: '1.25rem' } }}>
                   Resources
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.9rem', md: '0.875rem' } }}>
                   Access teaching materials and learning resources
                 </Typography>
               </Box>
@@ -233,15 +244,17 @@ const WelcomePage: React.FC = () => {
             color="primary"
             size="large"
             onClick={handleGetStarted}
+            fullWidth
             sx={{
-              px: 6,
-              py: 2,
-              fontSize: '1.2rem',
+              px: { xs: 4, md: 6 },
+              py: { xs: 1.5, md: 2 },
+              fontSize: { xs: '1rem', md: '1.2rem' },
               borderRadius: 3,
+              maxWidth: { xs: '100%', sm: '300px' },
               boxShadow: '0 4px 6px rgba(211, 47, 47, 0.2)',
               '&:hover': {
                 boxShadow: '0 6px 8px rgba(211, 47, 47, 0.3)',
-                transform: 'translateY(-2px)',
+                transform: { xs: 'none', md: 'translateY(-2px)' },
               },
               transition: 'all 0.2s',
             }}
