@@ -11,41 +11,28 @@ services:
       - ./backend:/app
     environment:
       - PYTHONUNBUFFERED=1
-      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/postgres
     networks:
       - app-network
-    depends_on:
-      - postgres
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        # This URL is baked into the React bundle and used by axios in the browser.
+        # From the browser's point of view, localhost is your machine, so this hits the backend container via the published port.
+        REACT_APP_API_URL: http://localhost:8000/api
     ports:
       - "3001:80"
     volumes:
       - ./frontend:/app
       - /app/node_modules
     environment:
-      - REACT_APP_API_URL=http://backend:8000
+      - REACT_APP_API_URL=http://localhost:8000/api
     depends_on:
       - backend
     networks:
       - app-network
-
-  postgres:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-    ports:
-      - "5432:5432"
-    networks:
-      - app-network
-    volumes:
-      - /var/lib/classplan/postgres-data:/var/lib/postgresql/data
 
 networks:
   app-network:

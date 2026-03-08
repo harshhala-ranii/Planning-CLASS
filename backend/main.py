@@ -4,15 +4,12 @@ import os
 from datetime import datetime
 from typing import List, Optional
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from gantt_generator import generate_gantt_chart
 from pydantic import BaseModel
 from recommended_topics import get_recommended_topics
-from sqlalchemy import Column, Integer, String, Text
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -60,47 +57,10 @@ class GanttRequest(BaseModel):
     plan: ClassPlan
 
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL", "postgresql+asyncpg://postgres:postgres@db:5432/postgres"
-)
-engine = create_async_engine(DATABASE_URL, echo=True)
-SessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-Base = declarative_base()
-
-
-class UserPlan(Base):
-    __tablename__ = "user_plans"
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(100))
-    centre_name = Column(String(100))
-    program = Column(String(100))
-    level = Column(String(100))
-    duration = Column(String(100))
-    plan_json = Column(Text)  # Store the plan as JSON string
-
-
-# Create the table if it doesn't exist
-async def init_db():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-
-@app.on_event("startup")
-async def on_startup():
-    await init_db()
-
-
 # In-memory storage (replace with database in production)
 plans = []
 
-# In-memory storage for user details
 user_details = []
-
-
-# Dependency to get DB session
-async def get_db():
-    async with SessionLocal() as session:
-        yield session
 
 
 @app.post("/api/plans")
@@ -122,7 +82,7 @@ async def get_plan(plan_id: int):
 
 
 @app.post("/api/generate-gantt")
-async def generate_gantt(plan: dict, db: AsyncSession = Depends(get_db)):
+async def generate_gantt(plan: dict):
     try:
         # Extract user details from the plan dict
         name = plan.get("name", "")
@@ -136,16 +96,6 @@ async def generate_gantt(plan: dict, db: AsyncSession = Depends(get_db)):
             for k, v in plan.items()
             if k not in ["name", "centre_name", "program", "level", "duration", "grade"]
         }
-        user_plan = UserPlan(
-            name=name,
-            centre_name=centre_name,
-            program=program,
-            level=level,
-            duration=duration,
-            plan_json=json.dumps(plan_for_json),
-        )
-        db.add(user_plan)
-        await db.commit()
         logger.info("Generating Gantt chart...")
         chart_path = generate_gantt_chart(plan_for_json)
         logger.info(f"Gantt chart generated at: {chart_path}")
